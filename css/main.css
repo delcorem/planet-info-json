@@ -1,0 +1,35 @@
+table.planetInfo {
+    font-family: "Times New Roman", Times, serif;
+    border: 1px solid #FFFFFF;
+    width: 1000px;
+    height: 500px;
+    text-align: left;
+    border-collapse: collapse;
+  }
+  table.planetInfo td, table.planetInfo th {
+    border: 1px solid #FFFFFF;
+    padding: 3px 2px;
+  }
+  table.planetInfo tbody td {
+    font-size: 13px;
+  }
+  table.planetInfo tr:nth-child(even) {
+    background: #D0E4F5;
+  }
+  table.planetInfo thead {
+    background: #0B6FA4;
+    background: -moz-linear-gradient(top, #4893bb 0%, #237dad 66%, #0B6FA4 100%);
+    background: -webkit-linear-gradient(top, #4893bb 0%, #237dad 66%, #0B6FA4 100%);
+    background: linear-gradient(to bottom, #4893bb 0%, #237dad 66%, #0B6FA4 100%);
+    border-bottom: 5px solid #FFFFFF;
+  }
+  table.planetInfo thead th {
+    font-size: 17px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: left;
+    border-left: 2px solid #FFFFFF;
+  }
+  table.planetInfo thead th:first-child {
+    border-left: none;
+  }
