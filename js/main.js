@@ -1,25 +1,48 @@
 $(document).ready(function()  {
 		
+    // Takes the planets.json file and loads all the data into the html table
 	$.getJSON("json/planets.json", function (data) {
 			for (i=0; i < data.SOLAR_SYSTEM.PLANETS.PLANET.length; i++) {
 				index = i + 1;
-				$("#pname"+index).append(data.students.studentRec[i].name);
-				$("#sage"+index).append(data.students.studentRec[i].age);
-				$("#sgender"+index).append(data.students.studentRec[i].gender);
-				prog = data.programs.program;
-				for (j=0; j < prog.length; j++) {
-					if (data.students.studentRec[i].program == prog[j].prog.substr(0,2)) {
-						$("#sprogram"+index).html(prog[j].prog.substr(3,prog[j].prog.length));
+                planet = data.SOLAR_SYSTEM.PLANETS.PLANET;
+				$("#pname"+index).append(planet[i].NAME);
+				$("#distance"+index).append(planet[i].DISTANCE);
+				$("#radius"+index).append(planet[i].RADIUS);
+                $("#year"+index).append(planet[i].LENGTH_OF_YEAR);
+                $("#day"+index).append(planet[i].DAY);
+                $("#mass"+index).append(planet[i].MASS);
+                $("#density"+index).append(planet[i].DENSITY);
 
-					}
-				}
-				if (data.students.studentRec[i].coop) {
-					$("#scoop"+index).append("COOP");}
-				else { $("#scoop"+index).append("No COOP"); }
-				for (j=0; j < data.students.studentRec[i].emails.length; j++) {
-					$("#semails"+index).append(data.students.studentRec[i].emails[j] + "<br>");
-				}
+                // Checks if satellite info exists, and if it does, loads it into a list in the satellite column
+                if(planet[i].hasOwnProperty("SATELLITES")) {
 
+                    // Checks if length is undefined, which means that there is only one satellite value
+                    if(planet[i].SATELLITES.SATELLITE.length === undefined) {
+                        $("#satellites"+index).append("<ul><li><strong>Name:</strong> " 
+                            + planet[i].SATELLITES.SATELLITE.NAME 
+                            + "</li><li><strong>Distance from Planet:</strong> " 
+                            + planet[i].SATELLITES.SATELLITE.DISTANCE_FROM_PLANET 
+                            + "</li><li><strong>Orbit:</strong> " 
+                            + planet[i].SATELLITES.SATELLITE.ORBIT 
+                            + "</li></ul>");
+                    }
+                    else {
+                        // Adds an unordered list for each satellite orbiting the planet
+                        for(j=0; j < planet[i].SATELLITES.SATELLITE.length; j++) {
+                        $("#satellites"+index).append("<ul><li><strong>Name:</strong> " 
+                            + planet[i].SATELLITES.SATELLITE[j].NAME 
+                            + "</li><li><strong>Distance from Planet:</strong> " 
+                            + planet[i].SATELLITES.SATELLITE[j].DISTANCE_FROM_PLANET 
+                            + "</li><li><strong>Orbit:</strong> " 
+                            + planet[i].SATELLITES.SATELLITE[j].ORBIT 
+                            + "</li></ul>");
+                        }
+                    }
+                }
+                else {
+                    // If there is no satellite, then N/A
+                    $("#satellites"+index).append("N/A");
+                }
 		}  
 	});
 });
